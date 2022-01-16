@@ -1,0 +1,15 @@
+<mat-nav-list>
+  <a routerLink="./package" routerLinkActive="list__link--active" mat-list-item>
+    <mat-icon mat-list-icon>category</mat-icon>
+    <span mat-line>Packages</span>
+  </a>
+  <a routerLink="./customer" routerLinkActive="list__link--active" mat-list-item>
+    <mat-icon mat-list-icon>person</mat-icon>
+    <span mat-line>Customers</span>
+  </a>
+  <mat-divider></mat-divider>
+  <a (click)="logout()" mat-list-item>
+    <mat-icon mat-list-icon>logout</mat-icon>
+    <span mat-line>Logout</span>
+  </a>
+</mat-nav-list>

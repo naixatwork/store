@@ -1,0 +1,14 @@
+<div class="p-5">
+  <div class="flex justify-between">
+    <div>
+      <h1>Purchases:</h1>
+      <p>total price: {{totalPrice | number}}</p>
+    </div>
+    <div>
+      <a href="https://idpay.ir/iranpaladins/file/218593" target="_blank" mat-flat-button color="primary">Finalize Purchase
+        <mat-icon>shopping_cart</mat-icon>
+      </a>
+    </div>
+  </div>
+  <app-table [config]="config"></app-table>
+</div>

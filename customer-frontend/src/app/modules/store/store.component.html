@@ -1,0 +1,31 @@
+<div class="p-5">
+  <div class="w-full sm:w-auto mb-5">
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Search</mat-label>
+      <input matInput [formControl]="searchControl" type="text">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+  <div class="flex flex-wrap gap-5">
+    <mat-card class="product" *ngFor="let product of products$ | async">
+      <mat-card-header>
+        <div mat-card-avatar class="bg-green-400"></div>
+        <mat-card-title>{{product.name}}</mat-card-title>
+        <mat-card-subtitle>{{product.price | number}} $ <span class="text-green-400">available</span>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="product.imageUrl" [alt]="product.name">
+      <mat-card-content>
+        <p>{{product.description}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="flex gap-1">
+          <button [disabled]="product.isAlreadyPurchased" (click)="purchase(product)" mat-flat-button
+                  color="accent">{{product.isAlreadyPurchased ? 'Purchased' : 'Add to Cart'}}
+            <mat-icon>sell</mat-icon>
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

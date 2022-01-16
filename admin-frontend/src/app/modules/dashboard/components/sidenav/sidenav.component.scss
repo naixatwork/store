@@ -1,0 +1,7 @@
+.list {
+  &__link {
+    &--active {
+      @apply text-blue-600;
+    }
+  }
+}

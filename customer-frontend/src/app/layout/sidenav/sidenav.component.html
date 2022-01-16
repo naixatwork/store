@@ -1,0 +1,25 @@
+<div class="h-full flex flex-col">
+  <mat-nav-list>
+    <a routerLink="/store" routerLinkActive="list__link--active" mat-list-item>
+      <mat-icon mat-list-icon>store</mat-icon>
+      <span mat-line>Store</span>
+    </a>
+    <a [disabled]="!isLoggedIn()" routerLink="/purchase" routerLinkActive="list__link--active" mat-list-item>
+      <mat-icon mat-list-icon>shopping_bag</mat-icon>
+      <span mat-line>Purchased Products</span>
+    </a>
+    <mat-divider></mat-divider>
+    <a *ngIf="!isLoggedIn()" routerLink="/auth" routerLinkActive="list__link--active" mat-list-item>
+      <mat-icon mat-list-icon>login</mat-icon>
+      <span mat-line>Login</span>
+    </a>
+    <a *ngIf="isLoggedIn()" (click)="logout()" mat-list-item>
+      <mat-icon mat-list-icon>logout</mat-icon>
+      <span mat-line>Logout</span>
+    </a>
+  </mat-nav-list>
+  <div class="mt-auto flex justify-center align-middle gap-3 p-3">
+<!--    <img class="w-10" src="assets/logo.png">-->
+    <h3 class="m-0" style="margin: 0 !important;">code with 💙 by Mahdi2000</h3>
+  </div>
+</div>

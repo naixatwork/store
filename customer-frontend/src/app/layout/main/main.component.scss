@@ -1,0 +1,10 @@
+.dashboard {
+  @apply w-full h-full;
+
+  &__content {
+  }
+
+  &__drawer {
+    @apply w-80;
+  }
+}

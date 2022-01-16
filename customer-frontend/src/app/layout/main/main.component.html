@@ -1,0 +1,22 @@
+<mat-drawer-container class="dashboard">
+  <mat-drawer class="dashboard__drawer" #drawer mode="over">
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content class="dashboard__content">
+    <mat-toolbar color="primary">
+      <div class="flex align-middle gap-3">
+        <button (click)="drawer.toggle()" mat-icon-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <img class="w-10" src="assets/logo.png">
+        <div>Mahdi2000's Store</div>
+      </div>
+      <div class="ml-auto">
+        <a routerLink="/purchase" mat-icon-button [disabled]="!isLoggedIn()">
+          <mat-icon [matBadgeHidden]="!isLoggedIn()" [matBadge]="purchasesCount" matBadgeColor="accent" matBadgeSize="small">shopping_bag</mat-icon>
+        </a>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
