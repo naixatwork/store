@@ -5,6 +5,10 @@ import {map, Subject} from "rxjs";
 import {tableStateManager} from "#shared/components/table/tableStateManager.operator";
 import {CustomerService} from './customer.service';
 import {Customer} from './customer.model';
+import {ProductBatchComponent} from "#modules/dashboard/components/product/product-batch/product-batch.component";
+import {ProductService} from "#modules/dashboard/components/product/product.service";
+import {MatBottomSheet} from "@angular/material/bottom-sheet";
+import {ShowPurchasesComponent} from "#modules/dashboard/components/customer/show-purchaces/show-purchases.component";
 
 @Component({
   selector: 'app-customer',
@@ -15,7 +19,10 @@ export class CustomerComponent implements OnInit {
   public config: TableConfig<Customer>;
   private unsubscribeAll: Subject<null>;
 
-  constructor(private readonly customerService: CustomerService) {
+  constructor(
+    private readonly customerService: CustomerService,
+    private readonly productService: ProductService, private readonly bottomSheet: MatBottomSheet
+  ) {
     this.config = new TableConfig<Customer>([], [], {
       mode: null,
       length: null,
@@ -46,7 +53,10 @@ export class CustomerComponent implements OnInit {
       data,
       [
         new IndexColumn(),
+        new Column('name'),
         new Column('username'),
+        new Column('address'),
+        new Column('phoneNumber'),
         new OperationColumn(
           [
             {
@@ -54,12 +64,7 @@ export class CustomerComponent implements OnInit {
               icon: 'shopping_bag',
               tooltip: 'Purchased Packages',
               operation: (customer) => {
-                console.log(customer.purchases)
-                let purchases = '';
-                for (const purchase of customer.purchases) {
-                  purchases += `${purchase.name}, `
-                }
-                alert(purchases)
+                this.openShowPurchasesDialog(customer.products)
               },
             },
           ],
@@ -69,6 +74,16 @@ export class CustomerComponent implements OnInit {
       ],
       {mode: Mode.LOCAL, length}
     );
+  }
+
+  public openShowPurchasesDialog(products: Product[]): void {
+    this.bottomSheet.open(ShowPurchasesComponent,
+      {
+        data: products
+      }
+    ).afterDismissed().subscribe(() => {
+      this.initializeData();
+    })
   }
 
 }

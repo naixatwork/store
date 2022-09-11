@@ -20,6 +20,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatBottomSheetModule} from "@angular/material/bottom-sheet";
 import {CustomerComponent} from './components/customer/customer.component';
 import {CustomerService} from "#modules/dashboard/components/customer/customer.service";
+import { ShowPurchasesComponent } from './components/customer/show-purchaces/show-purchases.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {CustomerService} from "#modules/dashboard/components/customer/customer.s
     SidenavComponent,
     ProductComponent,
     ProductBatchComponent,
-    CustomerComponent
+    CustomerComponent,
+    ShowPurchasesComponent
   ],
   imports: [
     CommonModule,

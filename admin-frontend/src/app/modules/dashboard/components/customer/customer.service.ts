@@ -9,6 +9,6 @@ export class CustomerService {
   }
 
   public getCustomers(): Observable<Customer[]> {
-    return this.httpClient.get<Customer[]>('customer');
+    return this.httpClient.get<Customer[]>('Customer');
   }
 }

@@ -23,7 +23,7 @@ export class StoreService {
 
   public getProducts(searchName?: string): Observable<Product[]> {
     const params = new HttpParams().append('name', searchName || '')
-    return this.httpClient.get<Product[]>('package', {params}).pipe(
+    return this.httpClient.get<Product[]>('Product', {params}).pipe(
       map((products) => {
         if (!this.authService.isLoggedIn()) {
           return products;
@@ -48,7 +48,7 @@ export class StoreService {
       const {id, purchases} = this.storageService.get<Customer>('auth') || {};
       if (!id) return;
       if (!purchases) return;
-      this.httpClient.patch<Customer>(`customer/purchase/${id}`, _.map([...purchases, product], 'id')).subscribe((response) => {
+      this.httpClient.patch<Customer>(`Customer/${id}`, _.map([...purchases, product])).subscribe((response) => {
         this.storageService.update({key: 'auth', value: response})
       })
     } else {

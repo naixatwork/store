@@ -10,20 +10,20 @@ export class ProductService {
   }
 
   public getProducts(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>('package');
+    return this.httpClient.get<Product[]>('Product');
   }
 
   public create(product: Product): Observable<Product> {
-    return this.httpClient.post<Product>('package', {...product})
+    return this.httpClient.post<Product>('Product', {...product})
   }
 
   public update(product: Product): Observable<Product> {
     const {id} = product;
-    return this.httpClient.patch<Product>(`package/${id}`, {...product})
+    return this.httpClient.put<Product>(`Product/${id}`, {...product})
   }
 
   public delete(product: Product): Observable<Product> {
     const {id} = product;
-    return this.httpClient.delete<Product>(`package/${id}`);
+    return this.httpClient.delete<Product>(`Product/${id}`);
   }
 }

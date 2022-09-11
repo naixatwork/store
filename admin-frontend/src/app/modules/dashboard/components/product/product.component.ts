@@ -21,7 +21,8 @@ export class ProductComponent implements OnInit {
 
   private unsubscribeAll: Subject<null>;
 
-  constructor(private readonly productService: ProductService, private readonly bottomSheet: MatBottomSheet
+  constructor(
+    private readonly productService: ProductService, private readonly bottomSheet: MatBottomSheet
   ) {
     this.unsubscribeAll = new Subject<null>();
   }

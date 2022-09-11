@@ -12,7 +12,7 @@ export class AuthService {
   }
 
   public login(body: admin): Observable<boolean> {
-    return this.httpClient.post<boolean>('admin/login', {...body});
+    return this.httpClient.get<boolean>(`Admin/?Username=${body.Username}&Password=${body.Password}`);
   }
 
   public logout(): void {

@@ -1,5 +1,5 @@
 export type admin =
   {
-    username: string;
-    password: string
+    Username: string;
+    Password: string
   }
