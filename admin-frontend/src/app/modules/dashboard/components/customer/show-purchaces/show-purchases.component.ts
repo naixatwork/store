@@ -18,4 +18,12 @@ export class ShowPurchasesComponent implements OnInit {
     console.log(this.products)
   }
 
+  getTotal(): number {
+    let total = 0;
+    for (const product of this.products) {
+      total += product.price
+    }
+    return total;
+  }
+
 }

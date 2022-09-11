@@ -12,7 +12,11 @@ export class AuthService {
   }
 
   public login(body: any): Observable<Customer> {
-    return this.httpClient.post<Customer>('customer/login', {...body});
+    return this.httpClient.post<Customer>(`Customer/login?username=${body.username}&password=${body.password}`, {});
+  }
+
+  public signUp(body: any): Observable<Customer> {
+    return this.httpClient.post<Customer>(`Customer`, {...body});
   }
 
   public logout(): void {

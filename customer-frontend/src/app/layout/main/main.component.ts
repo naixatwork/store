@@ -15,7 +15,7 @@ export class MainComponent implements OnInit {
   constructor(private readonly authService: AuthService, private readonly storageService: StorageService) {
     if (this.isLoggedIn()) {
       this.customer = this.storageService.get<Customer>('auth') || {};
-      this.purchasesCount = this.customer.purchases.length;
+      this.purchasesCount = this.customer.products.length;
     }
   }
 

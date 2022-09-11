@@ -1,0 +1,41 @@
+<div class="flex p-5 justify-center items-center h-full w-full">
+  <mat-card class="w-full sm:w-auto">
+    <h1 class="font-bold">Welcome!</h1>
+    <form [formGroup]="form" (ngSubmit)="login()">
+      <mat-form-field appearance="outline">
+        <mat-label>username</mat-label>
+        <input matInput type="text" formControlName="username">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-error>username is required</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>password</mat-label>
+        <input matInput type="password" formControlName="password">
+        <mat-icon matSuffix>password</mat-icon>
+        <mat-error>password is required</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>full-name</mat-label>
+        <input matInput type="text" formControlName="name">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-error>full-name is required</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>address</mat-label>
+        <input matInput type="text" formControlName="address">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-error>address is required</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>phoneNumber</mat-label>
+        <input matInput type="text" formControlName="phoneNumber">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-error>phoneNumber is required</mat-error>
+      </mat-form-field>
+      <div class="flex gap-3">
+        <button [disabled]="form.invalid" type="submit" mat-raised-button [color]="'primary'">sign up</button>
+        <a routerLink="/auth/sing-in" mat-button [color]="'warn'">sign in</a>
+      </div>
+    </form>
+  </mat-card>
+</div>

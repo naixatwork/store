@@ -44,16 +44,10 @@ export class StoreService {
   }
 
   public purchaseProduct(product: Product): void {
-    if (this.authService.isLoggedIn()) {
-      const {id, purchases} = this.storageService.get<Customer>('auth') || {};
-      if (!id) return;
-      if (!purchases) return;
-      this.httpClient.patch<Customer>(`Customer/${id}`, _.map([...purchases, product])).subscribe((response) => {
-        this.storageService.update({key: 'auth', value: response})
-      })
-    } else {
-      this.matSnackBar.open('Please log in first', 'Dismiss', {duration: 3000})
-      this.router.navigate(['/auth'])
-    }
+    const customer: Customer | null = this.storageService.get("auth");
+    if (!customer) return;
+    this.httpClient.put(`Customer/${customer.id}`, [product]).subscribe(() => {
+      this.matSnackBar.open("Your purchase has been completed we will show admin!", 'Dismiss')
+    })
   }
 }

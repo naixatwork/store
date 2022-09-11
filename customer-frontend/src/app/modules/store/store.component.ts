@@ -4,6 +4,7 @@ import {StoreService} from './store.service';
 import {debounceTime, Observable, Subject} from "rxjs";
 import {FormControl} from "@angular/forms";
 import {takeUntil} from "rxjs/operators";
+import {StorageService} from "#shared/services/storage.service";
 
 @Component({
   selector: 'app-store',
@@ -15,7 +16,10 @@ export class StoreComponent implements OnInit, OnDestroy {
   public searchControl = new FormControl('');
   private unsubscribeAll: Subject<never>;
 
-  constructor(private readonly storeService: StoreService) {
+  constructor(
+    private readonly storeService: StoreService,
+    private readonly storageService: StorageService
+  ) {
     this.products$ = this.storeService.getProducts();
     this.unsubscribeAll = new Subject<never>();
   }
@@ -35,7 +39,6 @@ export class StoreComponent implements OnInit, OnDestroy {
 
   public purchase(product: Product): void {
     this.storeService.purchaseProduct(product);
-    this.products$ = this.storeService.getProducts()
   }
 
   ngOnDestroy(): void {

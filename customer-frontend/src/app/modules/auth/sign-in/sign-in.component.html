@@ -14,7 +14,10 @@
         <mat-icon matSuffix>password</mat-icon>
         <mat-error>username is required</mat-error>
       </mat-form-field>
-      <button [disabled]="form.invalid" type="submit" mat-raised-button [color]="'primary'">login / singup</button>
+      <div class="flex gap-3">
+        <button [disabled]="form.invalid" type="submit" mat-raised-button [color]="'primary'">sign in</button>
+        <a routerLink="/auth/sign-up" mat-button [color]="'warn'">sign up</a>
+      </div>
     </form>
   </mat-card>
 </div>
