@@ -17,15 +17,14 @@ export class StorageService {
   }
 
   public get<Type>(key: string): Type | null {
-    const throwError = () => {
-      throw Error(`key ${key} doesnt exists, form: ${this}`);
-    };
-
-    if (!this.checkIfKeyExists(key)) {
-      throwError.call(this);
-      return null;
+    try {
+      if (!this.checkIfKeyExists(key)) {
+        return null;
+      }
+      return JSON.parse(localStorage.getItem(key) || '');
+    } finally {
     }
-    return JSON.parse(localStorage.getItem(key) || '');
+    return null;
   }
 
   public has(key: string): boolean {

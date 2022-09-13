@@ -4,10 +4,10 @@
       <mat-icon mat-list-icon>store</mat-icon>
       <span mat-line>Store</span>
     </a>
-<!--    <a [disabled]="!isLoggedIn()" routerLink="/purchase" routerLinkActive="list__link&#45;&#45;active" mat-list-item>-->
-<!--      <mat-icon mat-list-icon>shopping_bag</mat-icon>-->
-<!--      <span mat-line>Purchased Products</span>-->
-<!--    </a>-->
+    <a [disabled]="!isLoggedIn()" routerLink="/purchase" routerLinkActive="list__link--active" mat-list-item>
+      <mat-icon mat-list-icon>shopping_bag</mat-icon>
+      <span mat-line>Purchased Products</span>
+    </a>
     <mat-divider></mat-divider>
     <a *ngIf="!isLoggedIn()" routerLink="/auth" routerLinkActive="list__link--active" mat-list-item>
       <mat-icon mat-list-icon>login</mat-icon>

@@ -1,7 +1,9 @@
 import {Customer} from '#shared/model/customer.model';
 import {AuthService} from '#shared/services/auth.service';
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {StorageService} from "#shared/services/storage.service";
+import {StoreService} from "#modules/store/store.service";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-main',
@@ -9,14 +11,12 @@ import {StorageService} from "#shared/services/storage.service";
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  public customer!: any;
-  public purchasesCount: number = 0;
 
-  constructor(private readonly authService: AuthService, private readonly storageService: StorageService) {
-    if (this.isLoggedIn()) {
-      this.customer = this.storageService.get<Customer>('auth') || {};
-      this.purchasesCount = this.customer.products.length;
-    }
+  constructor(
+    private readonly authService: AuthService,
+    private readonly storageService: StorageService
+  ) {
+
   }
 
   ngOnInit(): void {

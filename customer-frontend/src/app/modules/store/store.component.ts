@@ -5,6 +5,7 @@ import {debounceTime, Observable, Subject} from "rxjs";
 import {FormControl} from "@angular/forms";
 import {takeUntil} from "rxjs/operators";
 import {StorageService} from "#shared/services/storage.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-store',
@@ -18,7 +19,8 @@ export class StoreComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly storeService: StoreService,
-    private readonly storageService: StorageService
+    private readonly storageService: StorageService,
+    private readonly matSnackBar: MatSnackBar
   ) {
     this.products$ = this.storeService.getProducts();
     this.unsubscribeAll = new Subject<never>();
@@ -39,6 +41,7 @@ export class StoreComponent implements OnInit, OnDestroy {
 
   public purchase(product: Product): void {
     this.storeService.purchaseProduct(product);
+    this.matSnackBar.open("Item has been added to your cart list", "Dismiss")
   }
 
   ngOnDestroy(): void {

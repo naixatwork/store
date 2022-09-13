@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {map, Observable} from "rxjs";
+import {BehaviorSubject, map, Observable} from "rxjs";
 import {Product} from "#shared/model/product.model";
 import {AuthService} from "#shared/services/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -8,10 +8,11 @@ import {Router} from "@angular/router";
 import {CustomerService} from "#shared/services/customer.service";
 import {StorageService} from "#shared/services/storage.service";
 import {Customer} from '#shared/model/customer.model';
-import * as _ from "lodash";
+import {tap} from "rxjs/operators";
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class StoreService {
+  public cart$ = new BehaviorSubject<Product[]>(this.storageService.get("cart") || [])
 
   constructor(public readonly httpClient: HttpClient,
               private readonly authService: AuthService,
@@ -19,6 +20,9 @@ export class StoreService {
               private readonly router: Router,
               private readonly customerService: CustomerService,
               private readonly storageService: StorageService) {
+    this.cart$.subscribe((products) => {
+      this.storageService.update({key: "cart", value: products});
+    });
   }
 
   public getProducts(searchName?: string): Observable<Product[]> {
@@ -44,10 +48,21 @@ export class StoreService {
   }
 
   public purchaseProduct(product: Product): void {
+    const addToCart = (customer: Customer) => {
+      this.cart$.next([...this.cart$.value, product]);
+
+    };
+
+    const redirectToAuth = () => {
+      this.router.navigate(["/auth"]);
+      this.matSnackBar.open("Please complete the authentication process", 'Dismiss')
+    };
+
     const customer: Customer | null = this.storageService.get("auth");
-    if (!customer) return;
-    this.httpClient.put(`Customer/${customer.id}`, [product]).subscribe(() => {
-      this.matSnackBar.open("Your purchase has been completed we will show admin!", 'Dismiss')
-    })
+    if (customer) {
+      addToCart(customer);
+    } else {
+      redirectToAuth();
+    }
   }
 }

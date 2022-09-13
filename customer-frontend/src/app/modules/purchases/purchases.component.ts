@@ -39,4 +39,8 @@ export class PurchasesComponent implements OnInit {
     );
   }
 
+  public purchaseProducts(): void {
+    this.customerService.buyProducts();
+  }
+
 }
